@@ -1,4 +1,4 @@
-package com.example.phasezero.entity;
+package com.phasezero.catalog.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
@@ -13,14 +13,9 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "products",
-        indexes = {
-                @Index(name = "idx_product_part_number", columnList = "partNumber"),
-                @Index(name = "idx_product_category", columnList = "category"),
-                @Index(name = "idx_product_price", columnList = "price"),
-                @Index(name = "idx_product_stock", columnList = "stock"),
-                @Index(name = "idx_product_created_at", columnList = "createdAt")
-        })
+@Table(name = "products", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "partNumber", name = "uk_product_part_number")
+})
 @Data
 @Builder
 @NoArgsConstructor
